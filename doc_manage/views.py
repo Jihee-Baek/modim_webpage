@@ -2,19 +2,44 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from .models import DocManage, DocAttached
 
-class FileDownload(ListView):
+class DocAttachedList(ListView):
     model = DocAttached
-    ordering = '-doc_mng'
-    template_name = './templates/document_download.html'
+    # ordering = '-pk'
+    template_name = 'document_download.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(FileDownload, self).get_context_data()
-        context['files'] = DocManage.objects.all()
+    def get_queryset(self):
+        return DocAttached.objects.order_by('doc_mng_id')[:3]
 
-        return context
 
-    def get_download_link(self):
-        return DocAttached.attached
+def categories(request):
 
-def file_list(request, slug):
-    pass
+    employee_info = DocAttached.objects.filter(doc_mng_id=1).order_by('-pk')[:1]
+    monthly_info = DocAttached.objects.filter(doc_mng_id=2).order_by('-pk')[:1]
+    weekly_info = DocAttached.objects.filter(doc_mng_id=3).order_by('-pk')[:1]
+
+    return render(
+        request,
+        'document_download.html',
+        {
+            'employee_info': employee_info,
+            'monthly_info': monthly_info,
+            'weekly_info': weekly_info,
+        }
+    )
+
+
+def per_category(request, slug):
+    doc_mng_id = DocManage.objects.filter(slug=slug)
+    per_info = DocAttached.objects.filter(doc_mng_id=doc_mng_id[0]).order_by('-pk')
+    DocAtt = per_info[0]
+
+    return render(
+        request,
+        'doc_manage/per_doc_download.html',
+        {
+            'per_info': per_info,
+            'slug_name': slug,
+            'DocAtt': DocAtt,
+            'doc_mng_id': doc_mng_id[0]
+        }
+    )

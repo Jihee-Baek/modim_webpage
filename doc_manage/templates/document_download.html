@@ -1,0 +1,104 @@
+
+{% extends 'doc_manage/base.html' %}
+
+{% block doc_download %}
+
+<h1> 최신 문서 다운로드 페이지 </h1>
+
+<div class="column">
+    <hr>
+    <div>
+    {% if employee_info.exists %}
+        {% for p in employee_info %}
+            <p>
+                <div class="row">
+
+                    <div class="col-md-3">
+                    <a href="{{ p.doc_mng.slug }}"> {{ p.doc_mng }} </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a href="{{ p.attached.url }}" role="button">
+                            <span class="material-symbols-outlined">
+                            download
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        {{ p.get_file_name }}
+                    </div>
+                </div>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h3>아직 게시물이 없습니다</h3>
+    {% endif %}
+
+    </div>
+    <hr>
+    <div>
+    {% if monthly_info.exists %}
+        {% for p in monthly_info %}
+            <p>
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <a href="{{ p.doc_mng.slug }}"> {{ p.doc_mng }} </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a href="{{ p.attached.url }}" role="button">
+                            <span class="material-symbols-outlined">
+                            download
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        {{ p.get_file_name }}
+                    </div>
+                </div>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h3>아직 게시물이 없습니다</h3>
+    {% endif %}
+    </div>
+    <hr>
+    <div>
+    {% if weekly_info.exists %}
+        {% for p in weekly_info %}
+            <p>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{{ p.doc_mng.slug }}"> {{ p.doc_mng }} </a>
+                    </div>
+
+                    <div class="col-md-1">
+                        <a href="{{ p.attached.url }}" role="button">
+                            <span class="material-symbols-outlined">
+                            download
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-8">
+                        {{ p.get_file_name }}
+                    </div>
+                </div>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h3>아직 게시물이 없습니다</h3>
+    {% endif %}
+
+    </div>
+    <hr>
+</div>
+
+<a href="/">
+처음으로
+</a>
+
+{% endblock %}

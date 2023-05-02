@@ -15,9 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from modim_web_prj.views import main, document_download, book_manage
-from doc_manage.views import FileDownload
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,8 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", main),
-    path("downloads/", document_download),
-    # path("downloads/", FileDownload.as_view()),
+    path("downloads/", include('doc_manage.urls')),
     path("bookmanage/", book_manage),
 ]
 
