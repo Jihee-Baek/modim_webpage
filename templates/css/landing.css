@@ -1,0 +1,11 @@
+body{
+    background: url(https://get.wallhere.com/photo/building-architecture-sky-daytime-structure-daylighting-line-corporate-headquarters-facade-angle-product-design-headquarters-black-and-white-symmetry-brutalist-architecture-house-skyscraper-commercial-building-window-glass-911607.jpg) no-repeat
+    center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
+
+section {
+    margin-bottom: 150px;
+}
